@@ -1,0 +1,94 @@
+{% load static %}
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+    // Set your publishable key: remember to change this to your live publishable key in production
+    // See your keys here: https://dashboard.stripe.com/account/apikeys
+    var stripe = Stripe('{{pubKey}}');
+    var elements = stripe.elements();
+
+    var email = '{{user.email}}'
+</script>
+<link rel="stylesheet" href="StripeElements.css">
+<div class="pt-4">
+    <h6 class="mb-4 text-info">Card Holders Name</h6>
+    <div class="form-row">
+        <div class="form-group col-md-6 mb-0">
+            <div id="div_id_firstName" class="form-group">
+                <label for="id_firstName" class=" requiredField">First Name<span class="asteriskField">*</span></label>
+                <div class="">
+                    <input type="text" name="firstName" maxlength="100" class="textinput textInput form-control" required="" id="id_firstName" value="{{user.first_name}}">
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-md-6 mb-0">
+            <div id="div_id_lastName" class="form-group">
+                <label for="id_lastName" class=" requiredField">Last Name<span class="asteriskField">*</span></label>
+                <div class="">
+                    <input type="text" name="lastName" maxlength="100" class="textinput textInput form-control" required="" id="id_lastName" value="{{user.last_name}}">
+                </div>
+            </div>
+        </div>
+    </div>
+    <h6 class="mb-4 text-info">Billing Address</h6>
+    <div class="form-row">
+        <div class="form-group col-md-12 mb-0">
+            <div id="div_id_addrLine1" class="form-group">
+                <label for="id_addrLine1" class=" requiredField">Street Address<span class="asteriskField">*</span></label>
+                <div class="">
+                    <input type="text" name="addrLine1" maxlength="100" class="textinput textInput form-control" required="" id="id_addrLine1">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-12 mb-0">
+            <div id="div_id_addrLine2" class="form-group">
+                <div class="">
+                    <input type="text" name="addrLine2" maxlength="100" class="textinput textInput form-control" id="id_addrLine2">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-9 mb-0">
+            <div id="div_id_addrCity" class="form-group">
+                <div class="">
+                    <label for="id_addrCity" class=" requiredField">City<span class="asteriskField">*</span></label>
+                    <input type="text" name="addrCity" maxlength="100" class="textinput textInput form-control" required="" id="id_addrCity">
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-md-1 mb-0">
+            <div id="div_id_addrState" class="form-group">
+                <div class="">
+                    <label for="id_addrState" class=" requiredField">State<span class="asteriskField">*</span></label>
+                    <input type="text" name="addrState" maxlength="100" class="textinput textInput form-control" required="" id="id_addrState">
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-md-2 mb-0">
+            <div id="div_id_addrZip" class="form-group">
+                <div class="">
+                    <label for="id_addrZip" class=" requiredField">Zip Code<span class="asteriskField">*</span></label>
+                    <input type="text" name="addrZip" maxlength="100" class="textinput textInput form-control" required="" id="id_addrZip">
+                </div>
+            </div>
+        </div>
+    </div>
+    <label for="id_card-element" class=" requiredField">Credit Card Information<span class="asteriskField">*</span></label>
+    <div id="card-element" class="MyCardElement pt-2">
+    <!-- Elements will create input elements here -->
+    </div>
+    <!-- We'll put the error messages in this element -->
+    <div id="card-errors" role="alert"></div>
+    <input id="payment-method" name="payment_method" type="hidden" value="">
+    <div class="sr-field-error" id="card-errors" role="alert"></div>
+    <div class="form-group" style="text-align: center;">
+        <button id="pay_btn" class="btn btn-outline-info" type="submit">
+            <div class="spinner hidden" id="spinner"></div>
+            <span id="button-text">{{btnText}}</span>
+        </button>
+    </div>
+</div>
+<script src="{% static 'base/js/stripe.js' %}"></script>

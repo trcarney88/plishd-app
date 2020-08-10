@@ -1,0 +1,180 @@
+{% extends "base/index.html" %}
+{% load crispy_forms_tags %}
+{% block header %}
+    <div class="media">
+        <div class="media-body">
+            {% if user.first_name == "" or user.last_name == "" %}
+                <h2 class="account-heading">{{ user.username }}</h2>
+            {% else %}
+                <h2 class="account-heading">{{ user.first_name }} {{user.last_name}}</h2>
+                <p class="text-white">Username: {{ user.username }}</p>
+            {% endif %}
+            <p class="text-white">Email: {{ user.email }}</p>
+            <p class="text-white">Job Title: {{ user.profile.jobTitle }}</p>
+            <p class="text-white">Company: {{ user.profile.company }}</p>
+        </div>
+        <div>
+            <div class="row">
+                <div class="col-12 pr-0">
+                    <a class="btn text-white" href="{% url 'profile_update' %}">Update Profile</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 pr-0">
+                    <a class="btn text-warning pointer" style="cursor: pointer" data-toggle="popup" data-target="#delete-account">Delete Account</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock header %}
+{% block content %}
+    <section id="notificationInfo" class="section pt-6">
+        <div class="text-left">
+            <h1 class="text-dark"><u>Notification Information</u></h1>
+        </div>
+        <div class="contianer">
+            <div class="row gap-y text-center">
+                <div class="col-md-3">
+                    <p class="small text-uppercase ls-2">Type</p>
+                    {% if user.profile.notificationType == 'E' %}
+                        <p class="lead-5 lh-1 fw-600 text-info">Email</p>
+                    {% elif user.profile.notificationType == 'T' %}
+                        <p class="lead-5 lh-1 fw-600 text-info">Text Message</p>
+                    {% endif %}
+                </div>
+                <div class="col-md-4">
+                    {% if user.profile.notificationType == 'E' %}
+                        <p class="small text-uppercase ls-2">Email Address</p>
+                        <p class="lead-5 lh-1 fw-600 text-info">{{ user.email }}</p>
+                    {% elif user.profile.notificationType == 'T' %}
+                        <p class="small text-uppercase ls-2">Mobile Number</p>
+                        <p class="lead-5 lh-1 fw-600 text-info">{{ user.profile.countryCode }}{{ user.profile.mobileNumber }}</p>
+                    {% endif %}
+                </div>
+                <div class="col-md-2">
+                    <p class="small text-uppercase ls-2">Interval</p>
+                    {% if user.profile.accompInterval == 'D' %}
+                        <p class="lead-5 lh-1 fw-600 text-info">Daily</p>
+                    {% elif user.profile.accompInterval == 'W' %}
+                        <p class="lead-5 lh-1 fw-600 text-info">Weekly</p>
+                    {% elif user.profile.accompInterval == 'M' %}
+                        <p class="lead-5 lh-1 fw-600 text-info">Monthly</p>
+                    {% elif user.profile.accompInterval == 'Q' %}
+                        <p class="lead-5 lh-1 fw-600 text-info">Quarterly</p>
+                    {% elif user.profile.accompInterval == 'SA' %}
+                        <p class="lead-5 lh-1 fw-600 text-info">Semi-Annual</p>
+                    {% elif user.profile.accompInterval == 'A' %}
+                        <p class="lead-5 lh-1 fw-600 text-info">Annual</p>
+                    {% endif %}
+                </div>
+                <div class="col-md-2">
+                    <p class="small text-uppercase ls-2">Reminder Time</p>
+                    <p class="lead-5 lh-1 fw-600 text-info">{{ user.profile.reminderTime }}</p>
+                </div>
+                <div class="col-md-1">
+                    <p class="small text-uppercase ls-2">Enabled</p>
+                    {% if user.profile.enabled == True %}
+                        <p class="lead-5 lh-1 fw-600" style="color:green"><span>&#10003;</span></p>
+                    {% elif user.profile.enabled == False %}
+                        <p class="lead-5 lh-1 fw-600" style="color:red">X</p>
+                    {% else %}
+                        <p class="lead-6 lh-1 fw-700" style="color:red">Unknown</p>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="mt-4" style="text-align: center;">
+                <a class="btn btn-outline-info update" href="{% url 'profile_update' %}">Update</a>
+            </div>
+        </div>
+    </section>
+    <section id="subscriptionInfo" class="section p-0 bg-gray">
+        <div class="text-left">
+            <h1 class="text-dark"><u>Subscription Information</u></h1>
+        </div>
+        <div class="container">
+            <div class="row gap-y text-center mt-6">
+                <div class="col-md-6">
+                    <p class="small text-uppercase ls-2">Type</p>
+                    {% if user.profile.subType == 'T' %}
+                        <p class="lead-6 lh-1 fw-700 text-info">Free Trial</p>
+                    {% elif user.profile.subType == 'M' %}
+                        <p class="lead-6 lh-1 fw-700 text-info">Monthly</p>
+                    {% elif user.profile.subType == 'Y' %}
+                        <p class="lead-6 lh-1 fw-700 text-info">Yearly</p>
+                    {% elif user.profile.subType == 'C' %}
+                        <p class="lead-6 lh-1 fw-700 text-info">Cancelled</p>
+                    {% endif %}
+                </div>
+                <div class="col-md-6">
+                    {% if user.profile.subType == 'T' %}
+                        <p class="small text-uppercase ls-2">Days left of trial</p>
+                        <p class="lead-6 lh-1 fw-700 text-info">{{ daysLeft }}</p>
+                    {% elif user.profile.subType == 'M' %}
+                        <p class="small text-uppercase ls-2">Account Status</p>
+                        {% if acctStatus == True %}
+                            <p class="lead-6 lh-1 fw-700" style="color:green"><span>&#10003;</span></p>
+                        {% elif acctStatus == False %}
+                            <p class="lead-6 lh-1 fw-700" style="color:red">X</p>
+                        {% else %}
+                            <p class="lead-6 lh-1 fw-700">{{acctStatus}}</p>
+                        {% endif %}
+                    {% elif user.profile.subType == 'Y' %}
+                        <p class="small text-uppercase ls-2 text-info">Account Status</p>
+                        {% if acctStatus %}
+                            <p class="lead-6 lh-1 fw-700" style="color:green"><span>&#10003;</span></p>
+                        {% else %}
+                            <p class="lead-6 lh-1 fw-700" style="color:red">X</p>
+                        {% endif %}
+                    {% elif user.profile.subType == 'C' %}
+                        <p class="small text-uppercase ls-2 text-info">Days of access left</p>
+                        <p class="lead-6 lh-1 fw-700 text-info">{{ daysLeft }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="mt-6" style="text-align: center;">
+            {% if user.profile.subType == 'T' or user.profile.subType == 'C' %}
+                <a class="btn btn-outline-info update" href="{% url 'payment' 'Monthly' %}">Subscribe</a>
+                <a class="btn btn-outline-danger pointer" style="cursor: pointer" data-toggle="popup" data-target="#delete-account">Delete Account</a>
+            {% elif user.profile.subType == 'M' %}
+                <a class="btn btn-outline-info update" href="{% url 'payment' 'Monthly' %}">Update</a>
+                <a class="btn btn-outline-danger pointer" style="cursor: pointer" data-toggle="popup" data-target="#cancel-sub">Cancel</a>
+            {% elif user.profile.subType == 'Y' %}
+                <a class="btn btn-outline-info update" href="{% url 'payment' 'Yearly' %}">Update</a>
+                <a class="btn btn-outline-danger pointer" style="cursor: pointer" data-toggle="popup" data-target="#cancel-sub">Cancel</a>
+            {% endif %}
+            
+        </div>
+    </section>
+
+    <!-- Cancel Subscription Popup --> 
+    <div id="cancel-sub" class="popup border-0 col-10 col-md-4 p-6" data-position="top-center" data-animation="slide-down">
+        <button type="button" class="close" data-dismiss="popup" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    
+        <div class="text-center position-relative">
+            <h3 class="fw-200">Are you sure?</h3>
+            <p class="lead-1">Your Subscription will be cancelled but you will have access to your account until the end of the billing period.</p>
+            <br>
+            <p class="mb-2"><a class="btn btn-lg btn-round btn-info px-7" href="{% url 'cancel_sub' user.username %}">Yes</a></p>
+            <p class="small mb-0"><a href="#" data-dismiss="popup">No</a></p>
+        </div>
+    </div>
+
+    <!-- Delete Account Popup -->
+    <div id="delete-account" class="popup border-0 col-10 col-md-4 p-6" data-position="top-center" data-animation="slide-down">
+        <button type="button" class="close" data-dismiss="popup" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    
+        <div class="text-center position-relative">
+            <h3 class="fw-200">Are you sure?</h3>
+            <p class="lead-1">This will delete your account and everything in your timeline.</p>
+            <br>
+            <p class="mb-2"><a class="btn btn-lg btn-round btn-info px-7" href="{% url 'profile_delete' user.username %}">Delete</a></p>
+            <p class="small mb-0"><a href="#" data-dismiss="popup">Cancel</a></p>
+        </div>
+    </div>
+{% endblock content %}
+

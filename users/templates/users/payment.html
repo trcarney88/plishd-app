@@ -1,0 +1,47 @@
+{% extends "base/index.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block header %}
+    <h1>Payment Information</h1>
+{% endblock header %}
+{% block content %}
+    <div class="pt-6">
+        <div class="content-section">
+            <form id="subscription-form" method="POST">
+                {% csrf_token %}
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <p class="text-uppercase text-lighter fw-400 ls-2">Pricing</p>
+                            <div class="btn-group btn-group-toggle mt-7" data-toggle="buttons">
+                                {% if plan == 'Monthly' %}
+                                    <label class="btn btn-round btn-outline-info w-150 active">
+                                        <input id="monthly" type="radio" name="pricing" value="monthly" autocomplete="off" {{monthly}}> Monthly
+                                    </label>
+                                    <label class="btn btn-round btn-outline-info w-150">
+                                        <input id="yearly" type="radio" name="pricing" value="yearly" autocomplete="off" {{yearly}}> Yearly
+                                    </label>
+                                {% else %}
+                                    <label class="btn btn-round btn-outline-info w-150">
+                                        <input id="monthly" type="radio" name="pricing" value="monthly" autocomplete="off" {{monthly}}> Monthly
+                                    </label>
+                                    <label class="btn btn-round btn-outline-info w-150 active">
+                                        <input id="yearly" type="radio" name="pricing" value="yearly" autocomplete="off" {{yearly}}> Yearly
+                                    </label>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-md-4 mx-auto mt-7 mt-md-0">
+                            <div class="card card-body text-center shadow-2 hover-shadow-8 py-6">
+                                <p class="text-info"><strong><span data-bind-radio="pricing" data-monthly="Monthly" data-yearly="Yearly"></span></strong></p>
+                                <p class="lead-7 fw-600 text-dark"><span data-bind-radio="pricing" data-monthly="$9" data-yearly="$99">$9.</span><span class="lead-4 align-text-top" data-bind-radio="pricing" data-monthly="99" data-yearly="99">99</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% include "users/stripe.html" %}
+            </form>
+        </div>
+    </div>
+{% endblock content %}

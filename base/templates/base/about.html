@@ -1,0 +1,66 @@
+{% extends "base/index.html" %}
+{% block header %}
+    <div class="col-md-7 mx-auto"></div>
+        <h1 style="font-family: 'Oswald', sans-serif;">VETERAN OWNED</h1>
+        <p class="lead-3">Our company was founded in 2020 with a mission to help people acheive there career goals more 
+            effectively. The idea for plishd came from a concept in the Navy known as a brag sheet. You are required to 
+            submit a bragsheet when evaluation time comes around, at the end of the year, to let your superiors know 
+            about all the things you've accomplished throughout the year. Now we bring this to you in an easy to use 
+            format, which gives you the power to achieve your career goals.</p>
+    </div>
+{% endblock header %}
+{% block content %}
+<div class="pt-6">
+    <!--
+    |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+    | Numbers (This will be implemented after we get some users)
+    |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+    !-->
+    <section class="section">
+        <div class="container">
+            <div class="row gap-y text-center">
+                <div class="col-md-6">
+                    <p class="small text-uppercase ls-2 text-info">Total Users</p>
+                    <p class="lead-8 lh-1 fw-700 text-info" data-provide="countup" data-from="0" data-to="{{ user_count }}"></p>
+                </div>
+                <div class="col-md-6">
+                    <p class="small text-uppercase ls-2 text-info">Their Accomplishments</p>
+                    <p class="lead-8 lh-1 fw-700 text-info" data-provide="countup" data-from="0" data-to="{{ accomp_count }}"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--
+    |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+    | Mission
+    |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+    -->
+    <section id="section-mission" class="section">
+        <div class="container">
+            <div class="row gap-y align-items-center">
+                <div class="col-md-7 mx-auto">
+                    <h2>The Mission</h2>
+                    <p class="lead">We strive to provide you with the best accomplishment tracking tools you can find in order to help you achieve your goals.</p>
+                    <br>
+                    <p>
+                        <i class="ti-check text-success mr-2"></i>
+                        <span> Provide the best service to help the most people</span>
+                    </p>
+                    <p>
+                        <i class="ti-check text-success mr-2"></i>
+                        <span> Easy to use interface</span>
+                    </p>
+                    <p>
+                        <i class="ti-check text-success mr-2"></i>
+                        <span> Customer Support</span>
+                    </p>
+                    <p>
+                        <i class="ti-check text-success mr-2"></i>
+                        <span> Continuous Improvement</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock content %}

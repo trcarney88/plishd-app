@@ -1,0 +1,114 @@
+<!--Load Static files-->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <!-- Facebook Pixel Code -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '603175730266677');
+    fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"src="https://www.facebook.com/tr?id=603175730266677&ev=PageView&noscript=1"/>
+  </noscript>
+  <!-- End Facebook Pixel Code -->
+  <head>
+    {% block head %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <title>Plishd - Track your work accomplishments. Get 'plishd.</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Maven+Pro&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link href="{% static 'base/css/page.min.css' %}" rel="stylesheet">
+    <link href="{% static 'base/css/style.css' %}" rel="stylesheet">
+    
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" href="{% static 'base/img/apple-touch-icon.png' %}">
+    <link rel="icon" href="{% static 'base/img/favicon.ico' %}">
+
+    <!--  Open Graph Tags -->
+    <meta property="og:title" content="Plishd">
+    <meta property="og:description" content="The work accomplishment tracking app.">
+    <meta property="og:image" content="{% static 'base/img/plishd-logo.png'">
+    <meta property="og:url" content="http://plishd.com/">
+    <meta name="twitter:card" content="summary_large_image">
+    {% endblock head %}
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light navbar-stick-dark" data-navbar="sticky">
+      <div class="container">
+
+        <div class="navbar-left">
+          <button class="navbar-toggler" type="button">&#9776;</button>
+          <a class="navbar-brand" href="{% url 'base-home' %}">
+            <img class="logo-dark" src="{% static 'base/img/logo-dark.png' %}" alt="logo">
+            <img class="logo-light" src="{% static 'base/img/logo-light.png' %}" alt="logo">
+          </a>
+        </div>
+
+        <section class="navbar-mobile">
+          <span class="navbar-divider d-mobile-none"></span>
+
+          <nav class="nav nav-navbar">
+            {% block navbar %}{% endblock navbar %}
+          </nav>
+        </section>
+
+        {% if user.is_authenticated %}
+          <a class="btn btn-sm btn-round btn-dark" href="{% url 'logout' %}">Logout</a>
+        {% else %}
+          <a class="btn btn-sm btn-round btn-dark" href="{% url 'login' %}">Login</a>
+        {% endif %}
+
+      </div>
+    </nav><!-- /.navbar -->
+    <!--Main section of the page-->
+    {% block body %}{% endblock body %}
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="row gap-y align-items-center">
+
+          <div class="col-6 col-lg-3">
+            <a href="{% url 'base-home' %}"><img class="logo-dark" src="{% static 'base/img/plishd-logo.png' %}" alt="logo"></a>
+          </div>
+
+          <div class="col-6 col-lg-3 text-right order-lg-last">
+            <small class="text-muted">&copy plishd.com</small>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="nav nav-bold nav-uppercase nav-trim justify-content-lg-center">
+              <a class="nav-link" href="{% url 'about' %}">About</a>
+              <!--<a class="nav-link" href="#">Policy</a>-->
+              <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </footer><!-- /.footer -->
+
+
+    <!-- Scripts -->
+    <script src="{% static 'base/js/page.min.js' %}"></script>
+    <script src="{% static 'base/js/script.js' %}"></script>
+
+  </body>
+</html>

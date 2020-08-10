@@ -1,0 +1,15 @@
+{% extends "base/index.html" %}
+{% block header %}
+    <h1>Logged Out</h1>
+{% endblock header %}
+{% block content %}
+<div class="pt-6">
+    <h2>Your account has been deleted</h2>
+    <p>Please let us know if there is anything we can do that would have improved your experience</p>
+    <div class="border-top pt-3">
+        <small class="text-muted">
+            <a href="{% url 'contact' %}">Contact</a>
+        </small>
+    </div>
+</div>
+{% endblock content %}

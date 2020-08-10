@@ -1,0 +1,21 @@
+{% extends "base/index.html" %}
+{% block header %}
+    <h1>Delete Accomplishment</h1>
+{% endblock header %}
+{% block content %}
+<div class="pt-6">
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Delete Accomplishment</legend>
+                <p class="text-dark">Delete the accomplishment posted on {{ object.date }}?</p>
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-danger" type="submit">Yes, Delete</button>
+                <a class="btn btn-outline-secondary" href="{% url 'timeline' user.username%}">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock content %}

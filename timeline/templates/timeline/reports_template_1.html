@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style type="text/css">
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 10pt;
+                width: 1000px;
+            }
+            .title, .accomp-date {
+                color: {{ accentColor }};
+            }
+            #title {
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <p>{{ user.first_name }} {{ user.last_name }}</p>
+            <p>{{ jobTitle }}</p>
+            <p>{{ company }}</p>
+        </header>
+        <main>
+            <div class="accomplishments">
+                <div id="title">
+                    <h1 class="title">Accomplishments</h1>
+                    <p>{{ fromDate.date|date:"F d, Y" }} - {{ toDate.date|date:"F d, Y" }}</p>
+                </div>
+                <hr class="divider" size=3 color={{ accentColor }}>
+                <br>
+                {% for accomplishment in accomplishments %}
+                    <article>
+                        <h3 class="accomp-date">{{ accomplishment.date|date:"F d, Y" }}</h3>
+                        <p class="accomp-body">{{ accomplishment.text }}</p>
+                    </article>
+                {% endfor %}
+            </div>
+        </main>
+    </body>
+</html>

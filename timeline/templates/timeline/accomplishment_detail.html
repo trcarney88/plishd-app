@@ -1,0 +1,36 @@
+{% extends "base/index.html" %}
+{% block header %}
+  <div class="media">
+    <div class="media-body">
+        {% if user.first_name == "" or user.last_name == "" %}
+            <h2 class="account-heading">{{ user.username }}</h2>
+        {% else %}
+            <h2 class="account-heading">{{ user.first_name }} {{user.last_name}}</h2>
+        {% endif %}
+        <p class="text-white">{{ user.profile.jobTitle }}</p>
+        <p class="text-white">{{ user.profile.company }}</p>
+    </div>
+  </div>
+{% endblock header %}
+{% block content %}
+<div class="pt-6">
+    <article class="media content-section">
+        <div class="media-body">
+            <div class="article-metadata">
+            <a class="text-info" href="{% url 'company-accomplishment' user.username accomplishment.company %}">{{accomplishment.company}}</a>
+            <p class="mb-0">
+                <a class="text-dark" href="{% url 'jobtitle-accomplishment' user.username accomplishment.jobTitle %}">{{ accomplishment.jobTitle }}</a>
+                <small class="text-muted ml-4 mb-0">{{ accomplishment.date|date:"F d, Y" }}</small>
+            </p>
+            {% if object.user == user %}
+                <div class="mt-1">
+                    <a class="btn btn-secondary btn-sml mt-1 mb-1" href="{% url 'accomplishment-update' object.id %}">Update</a>
+                    <a class="btn btn-danger btn-sml mt-1 mb-1" href="{% url 'accomplishment-delete' object.id %}">Delete</a>
+                </div>
+            {% endif %}
+            </div>
+            <p class="article-content">{{ accomplishment.text }}</p>
+        </div>
+    </article>
+</div>
+{% endblock content %}

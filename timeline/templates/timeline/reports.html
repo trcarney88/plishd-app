@@ -1,0 +1,66 @@
+{% extends "base/index.html" %}
+{% load crispy_forms_tags %}
+{% block header %}
+    <h1>Generate a Report</h1>
+{% endblock header %}
+{% block content %}
+<div class="pt-6">
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Report Parameters</legend>
+                <div class="form-row">
+                    <div class="form-group col-md-6 mb-0">
+                        <div id="div_id_jobTitle" class="form-group">
+                            <label for="id_jobTitle" class=" requiredField">Job Title<span class="asteriskField">*</span></label>
+                            <div class="">
+                                <input type="text" name="jobTitle" value="{{ user.profile.jobTitle }}" maxlength="100" class="textinput textInput form-control" required="" id="id_jobTitle">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6 mb-0">
+                        <div id="div_id_company" class="form-group">
+                            <label for="id_company" class=" requiredField">Company<span class="asteriskField">*</span></label>
+                            <div class="">
+                                <input type="text" name="company" value="{{ user.profile.company }}" maxlength="100" class="textinput textInput form-control" required="" id="id_company">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6 mb-0">
+                        <div id="div_id_fromDate" class="form-group">
+                            <label for="id_fromDate" class=" requiredField">From<span class="asteriskField">*</span></label>
+                            <div class="">
+                                <input type="date" name="fromDate" maxlength="100" class="textinput textInput form-control" required="" id="id_fromDate">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6 mb-0">
+                        <div id="div_id_toDate" class="form-group">
+                            <label for="id_toDate" class=" requiredField">To<span class="asteriskField">*</span></label>
+                            <div class="">
+                                <input type="date" name="toDate" value="{{ today }}" maxlength="100" class="textinput textInput form-control" required="" id="id_toDate">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12 mb-0">
+                        <div id="div_id_accentColor" class="form-group">
+                            <label for="id_accentColor" class=" requiredField">Accent Color<span class="asteriskField">*</span></label>
+                            <div class="">
+                                <input type="color" name="accentColor" value=#667eea maxlength="100" class="textinput textInput form-control" required="" id="id_accentColor">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="form-group" style="text-align: center">
+                <button class="btn btn-outline-info" type="submit">Generate PDF</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock content %}

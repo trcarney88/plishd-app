@@ -1,0 +1,42 @@
+{% extends "base/index.html" %}
+{% block header %}
+  <h1>Job Title: {{ view.kwargs.jobtitle }}</h1>
+  <small class="text-white">{{ page_obj.paginator.count }} results found</small>
+{% endblock header %}
+{% block content %}
+  <div class="pt-6">
+    {% for accomplishment in accomplishments %}
+      <article class="media content-section">
+        <div class="media-body">
+          <div class="article-metadata">
+              <p>
+                  <a class="text-info" href="{% url 'company-accomplishment' user.username accomplishment.company %}">{{ accomplishment.company }}</a>
+                  <small class="text-muted ml-4 mb-0">{{ accomplishment.date|date:"F d, Y" }}</small>
+                  <a class="btn btn-outline-info btn-sm float-right" href="{% url 'accomplishment-detail' accomplishment.id %}">Edit</a>
+              </p>
+          </div>
+          <p class="article-content">{{ accomplishment.text }}</p>
+        </div>
+      </article>
+    {% endfor %}
+    {% if is_paginated %}
+      {% if page_obj.has_previous %}
+        <a class="btn btn-outline-info mb-4" href="?page=1">&lt&lt</a>
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">&lt</a>
+      {% endif %}
+
+      {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+          <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+          <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+      {% endfor %}
+        
+      {% if page_obj.has_next %}
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_ong.next_page_number }}">></a>
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages}}">>></a>
+      {% endif %}
+    {% endif %}
+  </div>
+{% endblock content %}

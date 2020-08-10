@@ -1,0 +1,48 @@
+{% extends "base/index.html" %}
+{% load crispy_forms_tags %}
+{% block header %}
+    {% if type == "new" %}
+        <h1>Add a new Accomplishment</h1>
+    {% else %}
+        <h1>Edit Accomplishment</h1>
+    {% endif %}
+{% endblock header %}
+{% block content %}
+<div class="pt-6">
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                {% if type == "new" %}
+                    <legend class="border-bottom mb-4">New Accomplishment</legend>
+                {% endif %}
+                <div class="form-row">
+                    <div class="form-group col-md-6 mb-0">
+                        {{ form.jobTitle|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-6 mb-0">
+                        {{ form.company|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12 mb-0">
+                        {{ form.date|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12 mb-0">
+                        {{ form.text|as_crispy_field }}
+                    </div>
+                </div>
+            </fieldset>
+            <div class="form-group" style="text-align: center">
+                {% if type == "new" %}
+                    <button class="btn btn-outline-info" type="submit">Add</button>
+                {% else %}
+                    <button class="btn btn-outline-info" type="submit">Update</button>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock content %}

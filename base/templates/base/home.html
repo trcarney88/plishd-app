@@ -1,0 +1,187 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block navbar %}
+    {% if user.is_authenticated %}
+        <a class="nav-link" href="{% url 'timeline' user.username %}">Timeline</a>
+        <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+    {% else %}
+        <a class="nav-item nav-link" href="{% url 'register' 'Trial' %}">Sign Up</a>
+        <a class="nav-item nav-link" href="#pricing">Pricing</a>
+    {% endif %}
+{% endblock navbar %}
+
+{% block body %}
+<!-- Header -->
+<header id="home" class="header text-white h-fullscreen text-center text-lg-left" style="background-color: #b4b4b4">
+    <canvas class="constellation" data-color="rgba(102, 126, 234,0.8)"></canvas>
+    <div class="container">
+        <div class="row align-items-center h-100">
+            <div class="col-lg-7">
+                <h1 class="display-4 fw-500">Get the <span class="fw-500 pl-2" data-typing="Raise, Promotion, Dream Job" data-type-speed="80"></span></h1>
+                <h1 class="display-4 fw-500">you deserve.</h1>
+                <p class="lead mt-5 mb-8">Track what you've done. Get accom<strong>plishd</strong>!</p>
+                <p class="lead mt-5 mb-8"></p>
+                <p class="gap-xy">
+                <a class="btn btn-round btn-outline-light mw-150" href="#section-why">Learn more</a>
+                <a class="btn btn-round btn-light mw-150" href="{% url 'register' 'Trial' %}">Free Trial</a>
+                </p>
+            </div>
+            <div class="col-lg-5 ml-auto">
+                <img class="mt-5" src="{% static 'base/img/progress_tracking.svg' %}" alt="img">
+            </div>
+        </div>
+    </div>
+</header><!-- /.header -->
+<!-- Main Content -->
+<main class="main-content">
+    <section id="section-why" class="section">
+        <div class="container">
+            <header class="section-header">
+                <h2>Why you should track your work accomplishments?</h2>
+            </header>
+            <div class="row gap-y">
+                <div class="w-100"></div>
+                <div class="col-md-6 col-xl-6">
+                    <div class="media">
+                        <div class="lead-6 line-height-1 text-dark mr-5"><i class="icon-briefcase"></i></div>
+                        <div class="media-body">
+                            <h5>Make the Case for a Raise or Promotion</h5>
+                            <p><q>Why do you deserve it?</q> will be the first question asked by leadership. By tracking your accomplishments, you arm yourself with the information needed to get the raise or promotion you deserve</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-6">
+                    <div class="media">
+                        <div class="lead-6 line-height-1 text-primary mr-5"><i class="icon-trophy"></i></div>
+                        <div class="media-body">
+                            <h5>Ace your Performance Evaluation</h5>
+                            <p>Keeping track of what you do throughout the year will allow you to recall all the things you've done throughout the year, not just the few things you can remember off the top of your head.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row gap-y">
+                <div class="col-md-6 col-xl-6">
+                    <div class="media">
+                        <div class="lead-6 line-height-1 text-info mr-5"><i class="icon-document"></i></div>
+                        <div class="media-body">
+                            <h5>Easily Update your Resume</h5>
+                            <p>It's easy to update your resume, when the time comes, if you have a list of all your work achievements in front of you.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-6">
+                    <div class="media">
+                        <div class="lead-6 line-height-1 text-warning mr-5"><i class="icon-compass"></i></div>
+                        <div class="media-body">
+                            <h5>Set Better Goals</h5>
+                            <p>Its hard to know what goals to set if your don't know where you are in your career. Keeping track of your work accomplishments will help you know where you are so you can set your goals to get where you want to be.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--
+    |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+    | CTA
+    |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+    !-->
+    <section class="section py-7" style="background-color: #8ea6e6">
+        <div class="container">
+            <div class="row gap-y align-items-center">
+                <div class="col-md-9">
+                    <h4 class="mb-0 text-white text-center text-md-left">Don't Wait to Achieve Your Goals, Start Your 30 Day Free Trial NOW!</h4>
+                </div>
+                <div class="col-md-3 text-center text-md-right">
+                    <a class="btn btn-lg btn-round btn-light" href="{% url 'register' 'Trial' %}">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="section-features" class="section bg-gray">
+        <div class="container">
+            <header class="section-header">
+                <h1><strong style="font-family: Maven Pro; color:#8ea6e6">plishd</strong> is the solution</h1>
+            </header>
+            <div class="row gap-y align-items-center">
+                <div class="col-md-6 ml-auto">
+                    <h4>Notifications make it easy to track what you've done</h4>
+                    <p>Our notification system allows you to setup notifications, either email or text message, to work with your life. You can set the time of day you want to receive the notifications and the interval between notifications. Options include weekly, monthly, and quarterly reminders. You don't have to remember, we'll remind you.</p>
+                </div>
+                <div class="col-md-5 order-md-first">
+                    <img class="rounded shadow-2" src="{% static 'base/img/notifications.svg' %}" alt="...">
+                </div>
+            </div>
+            <hr class="my-8">
+            <div class="row gap-y align-items-center">
+                <div class="col-md-6 mr-auto">
+                    <h4>Always be able to find your accomplishments</h4>
+                    <p>You don't have to worry about losing a spreadsheet, word document, or physical journal anymore. Keep your achievements in the cloud. You can also look through accomplishments by company or job title. The list of all the amazing things you've done at work will always be in your pocket, on your laptop, and on any other device you use.</p>
+                </div>
+                <div class="col-md-5">
+                    <img class="rounded shadow-2" src="{% static 'base/img/treasure.svg' %}" alt="...">
+                </div>
+            </div>
+            <hr class="my-8">
+            <div class="row gap-y align-items-center">
+                <div class="col-md-6 ml-auto">
+                    <h4>A small investment could lead to big returns</h4>
+                    <p>For a small monthly fee, you can empower yourself to track all the great things you do at work and finally get that raise or promotion you deserve. One promotion or raise could pay for years of this service.</p>
+                </div>
+                <div class="col-md-5 order-md-first">
+                    <img class="rounded shadow-2" src="{% static 'base/img/wallet.svg' %}" alt="...">
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--
+    |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+    | Pricing
+    |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+    !-->
+    <section class="section bg-gray" id="pricing">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="text-uppercase text-lighter fw-400 ls-2">Pricing</p>
+                    <h2 class="fw-200 mb-6">How you want to pay? No hidden fees!</h2>
+                    <p>We have a single plan. You can choose to pay monthly or yearly.</p>
+                    <p> Cancel anytime.</p>
+                    <div class="btn-group btn-group-toggle mt-7" data-toggle="buttons">
+                        <label class="btn btn-round btn-outline-info w-150 active">
+                            <input type="radio" name="pricing-5" value="monthly" autocomplete="off" checked> Monthly
+                        </label>
+                        <label class="btn btn-round btn-outline-info w-150">
+                            <input type="radio" name="pricing-5" value="yearly" autocomplete="off"> Yearly
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-4 mx-auto mt-7 mt-md-0">
+                    <div class="card card-body text-center shadow-2 hover-shadow-8 py-6">
+                        <p class="text-info"><strong><span data-bind-radio="pricing-5" data-monthly="Monthly" data-yearly="Yearly"></span></strong></p>
+                        <p class="lead-7 fw-600 text-dark"><span data-bind-radio="pricing-5" data-monthly="$9" data-yearly="$99">$9.</span><span class="lead-4 align-text-top">99</span></p>
+                        <br>
+                        <div>
+                            <a class="btn btn-round btn-outline-info w-200" href=# data-bind-href="pricing-5" data-monthly="{% url 'register' 'Monthly' %}" data-yearly="{% url 'register' 'Yearly' %}">Subscribe</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Cookie notification -->
+    <div id="popup-cookie-3" class="popup text-white bg-dark col-10 py-4 border-0" data-once="cookie-key" data-position="bottom-center" data-animation="slide-up" data-autoshow="2000">
+        <div class="row gap-y align-items-center">
+        <div class="col-md">
+            This website uses cookies to ensure you get the best experience on our website. <a href="{% url 'cookies' %}">Lean more</a>
+        </div>
+
+        <div class="col-md-auto">
+            <button class="btn btn-sm btn-outline-light" data-dismiss="popup" data-once-button="true">Got it</button>
+        </div>
+        </div>
+    </div>
+</main>
+{% endblock body %}

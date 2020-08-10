@@ -1,0 +1,98 @@
+{% extends "base/index.html" %}
+{% load crispy_forms_tags %}
+
+{% block head %}
+    {{ block.super }}
+    <script src="https://js.stripe.com/v3/"></script>
+{% endblock head %}
+{% block header %}
+    <h1>Start Tracking Your Accomplishments TODAY!</h1>
+{% endblock header %}
+{% block content %}
+<div class="pt-6">
+    <div class="content-section">
+        <form id="subscription-form" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Subscribe</legend>
+                <div class="form-row">
+                    <div class="form-group col-md-6 mb=0">
+                        {{ form.jobTitle|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-6 mb-0">
+                        {{ form.company|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="form-row border-bottom border-top">
+                    <div class="form-group col-md-2 mb-0">
+                        <legend class="mb-4">Notifications</legend>
+                    </div>
+                    <div class="form-group col-md-0 mb-0 mt-3">
+                        {{ form.enabled|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6 mb-0">
+                        {{ form.notificationType|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-6 mb-0">
+                        {{ form.accompInterval|as_crispy_field }}
+                    </div>
+                </div>
+                <div id="mobileNumber" class="form-row hidden">
+                    <div class="form-group col-md-3 mb-0">
+                        {{ form.countryCode|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-9 mb-0">
+                        {{ form.mobileNumber|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6 mb-0">
+                        {{ form.reminderTime|as_crispy_field }}
+                    </div>
+                    <div id="timezone" class="form-group col-md-6 mb-0">
+                        {{ form.timezone|as_crispy_field }}
+                    </div>
+                </div>
+            </fieldset>
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <p class="text-uppercase text-lighter fw-400 ls-2">Pricing</p>
+                        <div class="btn-group btn-group-toggle mt-7" data-toggle="buttons">
+                            {% if plan == 'Monthly' %}
+                                <label class="btn btn-round btn-outline-info w-150 active">
+                                    <input type="radio" name="pricing" value="monthly" autocomplete="off" {{monthly}}> Monthly
+                                </label>
+                                <label class="btn btn-round btn-outline-info w-150">
+                                    <input type="radio" name="pricing" value="yearly" autocomplete="off" {{yearly}}> Yearly
+                                </label>
+                            {% else %}
+                                <label class="btn btn-round btn-outline-info w-150">
+                                    <input type="radio" name="pricing" value="monthly" autocomplete="off" {{monthly}}> Monthly
+                                </label>
+                                <label class="btn btn-round btn-outline-info w-150 active">
+                                    <input type="radio" name="pricing" value="yearly" autocomplete="off" {{yearly}}> Yearly
+                                </label>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-md-4 mx-auto mt-7 mt-md-0">
+                        <div class="card card-body text-center shadow-2 hover-shadow-8 py-6">
+                            <p class="text-info"><strong><span data-bind-radio="pricing" data-monthly="Monthly" data-yearly="Yearly"></span></strong></p>
+                            <p class="lead-7 fw-600 text-dark"><span data-bind-radio="pricing" data-monthly="$9" data-yearly="$99">$9.</span><span class="lead-4 align-text-top" data-bind-radio="pricing" data-monthly="99" data-yearly="99">99</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% include "users/stripe.html" %}
+        </form>
+        <div class="border-top pt-3">
+            <small class="text-muted">Already have an account?
+                <a class="ml-2" href="{% url 'login' %}">Sign In</a>
+            </small>
+        </div>
+    </div>
+</div>
+{% endblock content %}
